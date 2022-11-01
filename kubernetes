@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+    - name: task-pv-container
+      image: appimage
+      ports:
+        - containerPort: 5000
+          
+      volumeMounts:
+        - mountPath: "/mnt"
+          name: task-pv-storage
